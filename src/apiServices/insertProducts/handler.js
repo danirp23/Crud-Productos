@@ -10,7 +10,7 @@ const { errorBody, errorHandler } = require("../../utils/errorMessages");
 const insertProductsHandler = async (event, context) => {
     try {
         console.log('insertProductsHandler', event);
-        const data = event.body;
+        const data = JSON.parse(event.body);
         const objectValid = await validatorHandler(arrayInsertSchema, data);
         const isValidEvent = typeof objectValid !== "object";
         if (!isValidEvent)

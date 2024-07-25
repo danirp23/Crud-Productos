@@ -1,15 +1,23 @@
 const ERROR_RESPONSE_TEMPLATE = {
-  status: {
-    code: 500,
-    details: "Error",
-  }
+  statusCode: 500,
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: {}
 };
 
 const OK_RESPONSE_TEMPLATE = {
-  statuscode: 200
+  statusCode: 200,
+  headers: {
+    "Content-Type": "application/json"
+  }
 };
+
 const ERROR_ARRAY_RESPONSE_TEMPLATE = {
-  statuscode: 422
+  statusCode: 422,
+  headers: {
+    "Content-Type": "application/json"
+  }
 };
 
 /**
@@ -19,8 +27,10 @@ const ERROR_ARRAY_RESPONSE_TEMPLATE = {
  */
 function makeErrorResponse(details, statusCode) {
   let response = { ...ERROR_RESPONSE_TEMPLATE };
-  response.status.details = details;
-  response.status.code = statusCode;
+  response.body = JSON.stringify({ details });
+  response.statusCode = statusCode;
+  console.log('makeErrorResponse response:', response);
+  console.log('makeErrorResponse details:', details);
   return response;
 };
 
@@ -28,12 +38,13 @@ function makeErrorResponse(details, statusCode) {
  * This function creates the status response of body's response
  * @param {*} data request body to return
  */
-function makeOkResponse (data) { 
-  return { ...OK_RESPONSE_TEMPLATE, data };
+function makeOkResponse(data) {
+  console.log('makeOkResponse:', data);
+  return { ...OK_RESPONSE_TEMPLATE, body: JSON.stringify({ data }) };
 };
 
-function makeErrorArrayResponse (data) { 
-  return { ...ERROR_ARRAY_RESPONSE_TEMPLATE, data };
+function makeErrorArrayResponse(message) {
+  return { message };
 };
 
 module.exports = {

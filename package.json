@@ -13,5 +13,8 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.445.0",
     "joi": "^17.11.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^13.6.0"
   }
 }
