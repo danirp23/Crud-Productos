@@ -7,9 +7,9 @@ const { deleteSchema } = require("../../middleware/schemas/deleteProductSchema")
  * Handler for delete products to db
  * @param {*} event
  */
-const deleteProductsHandler = async (event, context) => {
+const deleteProductsHandler = async (event) => {
     try {
-        const data = JSON.parse(event.body)
+        const data = event.body;
         const objectValid = await validatorHandler(deleteSchema, data);
         const isValidEvent = typeof objectValid !== "object";
         if (!isValidEvent)

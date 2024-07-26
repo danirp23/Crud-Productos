@@ -5,11 +5,9 @@ const { errorHandler } = require("../../utils/errorMessages");
  * Handler for get products to db
  * @param {*} event
  */
-const getProductsHandler = async (event, context) => {
+const getProductsHandler = async (event) => {
     try {
-        console.log('getProductsHandler', event);
         const data = event;
-        console.log('event:',event);
         const response = await getProductsController(data);
         return response;
     } catch (error) {

@@ -7,9 +7,9 @@ const { errorBody, errorHandler } = require("../../utils/errorMessages");
  * Handler for update products to db
  * @param {*} event
  */
-const updateProductsHandler = async (event, context) => {
+const updateProductsHandler = async (event) => {
     try {
-        const data = JSON.parse(event.body)
+        const data = event.body;
         const objectValid = await validatorHandler(insertSchema, data);
         const isValidEvent = typeof objectValid !== "object";
         if (!isValidEvent)

@@ -1,23 +1,15 @@
 const ERROR_RESPONSE_TEMPLATE = {
   statusCode: 500,
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: {}
+  body: {
+    details: "Error",
+  }
 };
 
 const OK_RESPONSE_TEMPLATE = {
-  statusCode: 200,
-  headers: {
-    "Content-Type": "application/json"
-  }
+  statusCode: 200
 };
-
 const ERROR_ARRAY_RESPONSE_TEMPLATE = {
-  statusCode: 422,
-  headers: {
-    "Content-Type": "application/json"
-  }
+  statusCode: 422
 };
 
 /**
@@ -27,10 +19,8 @@ const ERROR_ARRAY_RESPONSE_TEMPLATE = {
  */
 function makeErrorResponse(details, statusCode) {
   let response = { ...ERROR_RESPONSE_TEMPLATE };
-  response.body = JSON.stringify({ details });
+  response.body = details;
   response.statusCode = statusCode;
-  console.log('makeErrorResponse response:', response);
-  console.log('makeErrorResponse details:', details);
   return response;
 };
 
@@ -39,12 +29,11 @@ function makeErrorResponse(details, statusCode) {
  * @param {*} data request body to return
  */
 function makeOkResponse(data) {
-  console.log('makeOkResponse:', data);
-  return { ...OK_RESPONSE_TEMPLATE, body: JSON.stringify({ data }) };
+  return { ...OK_RESPONSE_TEMPLATE, body: data };
 };
 
-function makeErrorArrayResponse(message) {
-  return { message };
+function makeErrorArrayResponse(data) {
+  return { ...ERROR_ARRAY_RESPONSE_TEMPLATE, body: data };
 };
 
 module.exports = {
